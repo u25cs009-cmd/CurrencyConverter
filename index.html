@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currency Converter — Exchange Board</title>
+    <title>Currency Converter — Exchange Board, Dashboard & Rates Compare</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
+            /* 1. Dark Theme (Default) */
             --bg: #14181f;
-            --panel: #1c222d;
-            --panel-2: #232a37;
+            --panel: rgba(28, 34, 45, 0.92);
+            --panel-2: rgba(35, 42, 55, 0.9);
             --tile: #f4efe3;
             --ink: #14181f;
             --brass: #c89b3c;
@@ -22,8 +23,112 @@
             --muted: #8b93a6;
             --up: #6fa06d;
             --down: #c06a4c;
-            --line: rgba(236, 231, 218, 0.09);
-            --radius: 6px;
+            --line: rgba(236, 231, 218, 0.12);
+            --radius: 12px;
+            --nav-bg: rgba(28, 34, 45, 0.85);
+            --modal-overlay: rgba(0, 0, 0, 0.8);
+            --card-hover: rgba(200, 155, 60, 0.1);
+            --shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.7);
+        }
+
+        [data-theme="light"] {
+            /* 2. Light Theme */
+            --bg: #f3f5f9;
+            --panel: rgba(255, 255, 255, 0.92);
+            --panel-2: rgba(238, 242, 247, 0.9);
+            --tile: #1e293b;
+            --ink: #ffffff;
+            --brass: #d97706;
+            --brass-dim: #b45309;
+            --text: #0f172a;
+            --muted: #64748b;
+            --up: #16a34a;
+            --down: #dc2626;
+            --line: rgba(15, 23, 42, 0.12);
+            --nav-bg: rgba(255, 255, 255, 0.88);
+            --modal-overlay: rgba(15, 23, 42, 0.5);
+            --card-hover: rgba(217, 119, 6, 0.1);
+            --shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.15);
+        }
+
+        [data-theme="pink"] {
+            /* 3. Pink / Rose Gold Theme */
+            --bg: #220f1d;
+            --panel: rgba(48, 22, 42, 0.92);
+            --panel-2: rgba(65, 30, 56, 0.9);
+            --tile: #fff0f5;
+            --ink: #220f1d;
+            --brass: #ec4899;
+            --brass-dim: #be185d;
+            --text: #fdf2f8;
+            --muted: #f472b6;
+            --up: #34d399;
+            --down: #f87171;
+            --line: rgba(244, 114, 182, 0.2);
+            --nav-bg: rgba(48, 22, 42, 0.88);
+            --modal-overlay: rgba(34, 15, 29, 0.75);
+            --card-hover: rgba(236, 72, 153, 0.14);
+            --shadow: 0 20px 45px -15px rgba(236, 72, 153, 0.25);
+        }
+
+        [data-theme="emerald"] {
+            /* 4. Emerald Forest Theme */
+            --bg: #092019;
+            --panel: rgba(13, 43, 34, 0.92);
+            --panel-2: rgba(19, 58, 46, 0.9);
+            --tile: #e6f4f1;
+            --ink: #092019;
+            --brass: #10b981;
+            --brass-dim: #047857;
+            --text: #ecfdf5;
+            --muted: #6ee7b7;
+            --up: #34d399;
+            --down: #f87171;
+            --line: rgba(16, 185, 129, 0.2);
+            --nav-bg: rgba(13, 43, 34, 0.88);
+            --modal-overlay: rgba(9, 32, 25, 0.75);
+            --card-hover: rgba(16, 185, 129, 0.14);
+            --shadow: 0 20px 45px -15px rgba(16, 185, 129, 0.25);
+        }
+
+        [data-theme="cyberpunk"] {
+            /* 5. Cyberpunk Purple Theme */
+            --bg: #130a2a;
+            --panel: rgba(31, 17, 66, 0.92);
+            --panel-2: rgba(43, 24, 91, 0.9);
+            --tile: #f5f0ff;
+            --ink: #130a2a;
+            --brass: #06b6d4;
+            --brass-dim: #0891b2;
+            --text: #fae8ff;
+            --muted: #c084fc;
+            --up: #22c55e;
+            --down: #ef4444;
+            --line: rgba(192, 132, 252, 0.22);
+            --nav-bg: rgba(31, 17, 66, 0.88);
+            --modal-overlay: rgba(19, 10, 42, 0.8);
+            --card-hover: rgba(6, 182, 212, 0.16);
+            --shadow: 0 20px 45px -15px rgba(192, 132, 252, 0.3);
+        }
+
+        [data-theme="sunset"] {
+            /* 6. Sunset Amber Theme */
+            --bg: #1c1412;
+            --panel: rgba(43, 28, 24, 0.92);
+            --panel-2: rgba(58, 38, 32, 0.9);
+            --tile: #fff7ed;
+            --ink: #1c1412;
+            --brass: #f97316;
+            --brass-dim: #c2410c;
+            --text: #fff7ed;
+            --muted: #fdba74;
+            --up: #4ade80;
+            --down: #f87171;
+            --line: rgba(249, 115, 22, 0.2);
+            --nav-bg: rgba(43, 28, 24, 0.88);
+            --modal-overlay: rgba(28, 20, 18, 0.8);
+            --card-hover: rgba(249, 115, 22, 0.14);
+            --shadow: 0 20px 45px -15px rgba(249, 115, 22, 0.25);
         }
 
         * {
@@ -34,19 +139,43 @@
         body {
             margin: 0;
             padding: 0;
-            background:
-                radial-gradient(ellipse at 20% -10%, rgba(200, 155, 60, 0.08), transparent 45%),
-                var(--bg);
             color: var(--text);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ---- Ambient Background Video & Overlay ---- */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.35) blur(2px);
+            pointer-events: none;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(ellipse at 20% -10%, rgba(200, 155, 60, 0.15), transparent 50%), var(--bg);
+            opacity: 0.82;
+            z-index: -1;
+            pointer-events: none;
+            transition: background 0.3s ease;
         }
 
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 48px 20px 32px;
+            padding-bottom: 40px;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -56,13 +185,299 @@
             }
         }
 
+        /* ---- TOP NAVIGATION MENU ---- */
+        .navbar {
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 12px 24px;
+            margin-bottom: 36px;
+            transition: background 0.3s ease, border-color 0.3s ease, display 0.2s ease;
+        }
+
+        .navbar.hidden {
+            display: none !important;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        /* Redesigned CurrenX Brand Logo & Typography */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--brass), var(--brass-dim));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink);
+            box-shadow: 0 4px 14px rgba(200, 155, 60, 0.35);
+        }
+
+        .brand-text {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 0.05em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text .x-accent {
+            color: var(--brass);
+            text-shadow: 0 0 10px rgba(200, 155, 60, 0.4);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item button {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item button:hover {
+            color: var(--text);
+            background: var(--card-hover);
+        }
+
+        .nav-item button.active {
+            color: var(--brass);
+            background: var(--card-hover);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Icon Button */
+        .icon-btn {
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            color: var(--text);
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--brass);
+            color: var(--brass);
+            transform: scale(1.05);
+        }
+
+        .icon-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Login / User Profile Button */
+        .login-btn {
+            background: var(--brass);
+            color: var(--ink);
+            border: none;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 9px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(200, 155, 60, 0.25);
+        }
+
+        .login-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        .user-profile-btn {
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            color: var(--text);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 12px 6px 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .user-profile-btn:hover {
+            border-color: var(--brass);
+        }
+
+        .user-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--brass);
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        /* Dropdown menus */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 210px;
+            background: var(--panel);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 6px;
+            display: none;
+            flex-direction: column;
+            z-index: 120;
+        }
+
+        .dropdown-menu.open {
+            display: flex;
+            animation: fadeIn 0.15s ease;
+        }
+
+        .dropdown-item {
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item.active {
+            background: var(--card-hover);
+            color: var(--brass);
+        }
+
+        .theme-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--line);
+            margin: 4px 0;
+        }
+
+        /* ---- MAIN CONTENT LAYOUT ---- */
         .wrap {
             width: 100%;
-            max-width: 620px;
+            max-width: 660px;
+            padding: 0 20px;
+        }
+
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header {
             margin-bottom: 28px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--brass);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
 
         .eyebrow {
@@ -88,15 +503,8 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.35;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
         }
 
         h1 {
@@ -112,27 +520,31 @@
             color: var(--muted);
             font-size: 14px;
             margin-top: 8px;
-            max-width: 46ch;
+            max-width: 52ch;
         }
 
-        /* ---- Board ---- */
+        /* ---- Board (Converter View) ---- */
         .board {
             background: var(--panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--line);
-            border-radius: 10px;
-            padding: 26px;
+            border-radius: 20px;
+            padding: 28px;
             position: relative;
-            box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.6);
+            box-shadow: var(--shadow);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .board::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 26px;
-            right: 26px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--brass-dim), transparent);
+            left: 28px;
+            right: 28px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--brass), transparent);
+            border-radius: 2px;
         }
 
         .row {
@@ -161,21 +573,21 @@
             width: 100%;
             background: var(--tile);
             color: var(--ink);
-            border: none;
-            border-radius: var(--radius);
-            padding: 14px 16px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 14px;
+            padding: 14px 18px;
             font-family: 'Space Mono', monospace;
             font-weight: 700;
             font-size: 26px;
             outline: none;
-            transition: box-shadow 0.15s ease;
+            transition: box-shadow 0.15s ease, border-color 0.15s ease;
         }
 
         .amount-input:focus {
             box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.45);
         }
 
-        /* Currency selector (custom dropdown) */
+        /* Currency selector */
         .cur {
             position: relative;
         }
@@ -183,9 +595,9 @@
         .cur-btn {
             background: var(--tile);
             color: var(--ink);
-            border: none;
-            border-radius: var(--radius);
-            padding: 14px 14px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 14px;
+            padding: 14px 16px;
             font-family: 'Space Mono', monospace;
             font-weight: 700;
             font-size: 18px;
@@ -193,8 +605,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            min-width: 118px;
+            min-width: 124px;
             justify-content: space-between;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .cur-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .cur-btn .flag {
@@ -213,9 +631,10 @@
             width: 260px;
             max-height: 280px;
             background: var(--panel-2);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--line);
-            border-radius: 8px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             z-index: 20;
             display: none;
             flex-direction: column;
@@ -236,7 +655,7 @@
             background: var(--bg);
             border: 1px solid var(--line);
             color: var(--text);
-            border-radius: 5px;
+            border-radius: 8px;
             padding: 8px 10px;
             font-family: 'Inter', sans-serif;
             font-size: 13px;
@@ -257,14 +676,15 @@
             align-items: center;
             gap: 10px;
             padding: 8px 10px;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 13px;
+            color: var(--text);
         }
 
         .cur-opt:hover,
         .cur-opt.active {
-            background: rgba(200, 155, 60, 0.14);
+            background: var(--card-hover);
         }
 
         .cur-opt .code {
@@ -302,8 +722,8 @@
             background: var(--panel-2);
             border: 1px solid var(--line);
             color: var(--brass);
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -311,10 +731,11 @@
             justify-content: center;
             transition: transform 0.25s ease, background 0.15s ease;
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .swap-btn:hover {
-            background: rgba(200, 155, 60, 0.14);
+            background: var(--card-hover);
         }
 
         .swap-btn.spin {
@@ -322,8 +743,8 @@
         }
 
         .swap-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
         }
 
         /* result */
@@ -343,7 +764,7 @@
         .flap-line {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 5px;
         }
 
         .flap-char {
@@ -353,16 +774,18 @@
             font-weight: 700;
             font-size: 34px;
             line-height: 1;
-            padding: 10px 4px;
-            min-width: 26px;
+            padding: 10px 6px;
+            min-width: 28px;
             text-align: center;
-            border-radius: 4px;
+            border-radius: 8px;
             perspective: 200px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .flap-char.sym {
             color: var(--brass-dim);
             background: transparent;
+            box-shadow: none;
             min-width: auto;
             padding: 10px 2px;
         }
@@ -372,24 +795,10 @@
         }
 
         @keyframes flap {
-            0% {
-                transform: rotateX(0deg);
-            }
-
-            48% {
-                transform: rotateX(-90deg);
-                opacity: 0.4;
-            }
-
-            52% {
-                transform: rotateX(-90deg);
-                opacity: 0.4;
-            }
-
-            100% {
-                transform: rotateX(0deg);
-                opacity: 1;
-            }
+            0% { transform: rotateX(0deg); }
+            48% { transform: rotateX(-90deg); opacity: 0.4; }
+            52% { transform: rotateX(-90deg); opacity: 0.4; }
+            100% { transform: rotateX(0deg); opacity: 1; }
         }
 
         .meta {
@@ -418,8 +827,612 @@
             color: var(--up);
         }
 
+        /* ---- ENHANCED DASHBOARD VIEW ---- */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .stat-val {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--brass);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .dash-card {
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .dash-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .dash-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Market Strength Meter Widget */
+        .meter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .meter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .meter-label-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .meter-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--panel-2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .meter-bar-fill {
+            height: 100%;
+            background: var(--brass);
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .clear-btn {
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .clear-btn:hover {
+            color: var(--down);
+            border-color: var(--down);
+        }
+
+        /* Favorites grid */
+        .fav-pairs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+        }
+
+        .fav-chip {
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .fav-chip:hover {
+            border-color: var(--brass);
+            transform: translateY(-2px);
+            background: var(--card-hover);
+        }
+
+        .fav-pair-code {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .fav-pair-sub {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* History Table */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--panel-2);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .history-item .hist-pair {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .history-item .hist-time {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .history-item .hist-val {
+            color: var(--brass);
+            font-weight: 700;
+        }
+
+        .empty-history {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            padding: 24px 0;
+        }
+
+        /* ---- COMPARE MATRIX VIEW ---- */
+        .compare-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .compare-card {
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .compare-card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .compare-card-flag {
+            font-size: 26px;
+        }
+
+        .compare-card-code {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .compare-card-name {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .compare-card-val {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--brass);
+        }
+
+        /* ---- DEDICATED AUTH PAGES (SIGN IN, SIGN UP, GOOGLE EMAIL, GOOGLE OTP) ---- */
+        .auth-card {
+            background: var(--panel);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 36px 32px;
+            box-shadow: var(--shadow);
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .auth-header h2 {
+            font-family: 'Archivo Condensed', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+        }
+
+        .auth-header p {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--brass);
+        }
+
+        .forgot-link {
+            color: var(--brass);
+            font-size: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 8px;
+            text-align: left;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--brass);
+            color: var(--ink);
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--muted);
+            font-size: 11px;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .auth-divider span {
+            padding: 0 12px;
+        }
+
+        .btn-google {
+            width: 100%;
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            color: var(--text);
+            padding: 11px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-google:hover {
+            border-color: var(--brass);
+            background: var(--card-hover);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .auth-footer a {
+            color: var(--brass);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Google OTP 4-Digit Inputs */
+        .otp-input {
+            width: 52px;
+            height: 58px;
+            border-radius: 10px;
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .otp-input:focus {
+            border-color: var(--brass);
+            box-shadow: 0 0 0 3px rgba(200, 155, 60, 0.3);
+        }
+
+        /* ---- FAQ ACCORDION CARDS ---- */
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .faq-card {
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 18px 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        .faq-card:hover {
+            border-color: var(--brass);
+        }
+
+        .faq-question {
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text);
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .faq-card.open .faq-answer {
+            display: block;
+        }
+
+        .faq-card.open .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-icon {
+            transition: transform 0.2s ease;
+            color: var(--brass);
+        }
+
+        /* ---- ABOUT & OWNER PAGES ---- */
+        .about-section {
+            background: var(--panel);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .owner-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--panel-2);
+            border-radius: 14px;
+            padding: 24px;
+            margin-top: 16px;
+            border: 1px solid var(--line);
+        }
+
+        .owner-avatar-lg {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--brass);
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            flex-shrink: 0;
+            box-shadow: 0 6px 18px rgba(200, 155, 60, 0.35);
+        }
+
+        .owner-details h3 {
+            margin: 0 0 4px 0;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .owner-details .owner-title {
+            color: var(--brass);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .owner-details p {
+            color: var(--muted);
+            font-size: 13.5px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ---- DEDICATED FULL-PAGE WELCOME LANDING VIEW ---- */
+        .welcome-card {
+            background: var(--panel);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 42px 36px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 480px;
+            margin: 40px auto 0;
+        }
+
+        .welcome-brand-badge {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--brass), var(--brass-dim));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink);
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 24px rgba(200, 155, 60, 0.4);
+        }
+
+        .btn-guest {
+            width: 100%;
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            color: var(--text);
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-guest:hover {
+            border-color: var(--brass);
+            background: var(--card-hover);
+        }
+
+        /* ---- MODALS & OVERLAYS ---- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-box {
+            background: var(--panel);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
         footer {
-            margin-top: 22px;
+            margin-top: 36px;
             font-size: 12px;
             color: var(--muted);
             text-align: center;
@@ -436,98 +1449,624 @@
             text-decoration: underline;
         }
 
-        @media (max-width:480px) {
-            .row {
-                grid-template-columns: 1fr;
-            }
-
-            .cur-btn {
-                width: 100%;
-            }
-
-            .flap-char {
-                font-size: 26px;
-                padding: 8px 3px;
-                min-width: 20px;
-            }
-
-            h1 {
-                font-size: 32px;
-            }
+        @media (max-width: 580px) {
+            .navbar { padding: 10px 14px; }
+            .brand-text { font-size: 18px; }
+            .row { grid-template-columns: 1fr; }
+            .cur-btn { width: 100%; }
+            .flap-char { font-size: 26px; padding: 8px 3px; min-width: 20px; }
+            h1 { font-size: 32px; }
+            .form-grid-2 { grid-template-columns: 1fr; }
+            .owner-card { flex-direction: column; text-align: center; }
+            .welcome-card { padding: 30px 20px; }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="wrap">
-        <header>
-            <div class="eyebrow">Live exchange board</div>
-            <h1>Currency Converter</h1>
-            <p class="sub">Enter an amount, pick two currencies, and watch the board flip to the current rate.</p>
-        </header>
+    <!-- AMBIENT LOOPING BACKGROUND VIDEO & OVERLAY -->
+    <video class="bg-video" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
 
-        <div class="board">
-            <div class="row">
-                <div class="field">
-                    <label for="amount">Amount</label>
-                    <input id="amount" class="amount-input" type="text" inputmode="decimal" value="1"
-                        autocomplete="off">
-                </div>
-                <div class="field">
-                    <label>From</label>
-                    <div class="cur" id="cur-from">
-                        <button class="cur-btn" type="button" aria-haspopup="listbox">
-                            <span class="flag" data-flag></span>
-                            <span data-code>USD</span>
-                            <span class="car">▾</span>
-                        </button>
-                        <div class="cur-panel">
-                            <div class="cur-search"><input type="text" placeholder="Search currency…"></div>
-                            <div class="cur-list" role="listbox"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swap-row">
-                <button class="swap-btn" id="swap" title="Swap currencies" aria-label="Swap currencies">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-                        stroke-linejoin="round">
+    <!-- TOP NAVIGATION MENU -->
+    <nav class="navbar" id="main-navbar">
+        <div class="nav-container">
+            <!-- Redesigned CurrenX Brand Logo & Typography -->
+            <a class="brand" id="nav-brand">
+                <div class="brand-badge">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="17 1 21 5 17 9"></polyline>
                         <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
                         <polyline points="7 23 3 19 7 15"></polyline>
                         <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                     </svg>
-                </button>
-            </div>
+                </div>
+                <div class="brand-text">Curren<span class="x-accent">X</span></div>
+            </a>
 
-            <div class="row" style="grid-template-columns:auto 1fr; margin-bottom:18px;">
-                <div class="field">
-                    <label>To</label>
-                    <div class="cur" id="cur-to">
-                        <button class="cur-btn" type="button" aria-haspopup="listbox">
-                            <span class="flag" data-flag></span>
-                            <span data-code>INR</span>
-                            <span class="car">▾</span>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <button id="tab-converter">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Converter
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button id="tab-dashboard">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        Dashboard
+                    </button>
+                </li>
+            </ul>
+
+            <div class="nav-controls">
+                <!-- Theme Selector Menu -->
+                <div class="dropdown-wrapper">
+                    <button class="icon-btn" id="theme-menu-btn" title="Choose Palette Theme" aria-label="Choose Palette Theme">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    </button>
+                    <div class="dropdown-menu" id="theme-dropdown">
+                        <button class="dropdown-item" data-set-theme="dark">
+                            <span class="theme-dot" style="background: #c89b3c;"></span>
+                            Dark Mode 🌙
                         </button>
-                        <div class="cur-panel">
-                            <div class="cur-search"><input type="text" placeholder="Search currency…"></div>
-                            <div class="cur-list" role="listbox"></div>
+                        <button class="dropdown-item" data-set-theme="light">
+                            <span class="theme-dot" style="background: #d97706;"></span>
+                            Light Mode ☀️
+                        </button>
+                        <button class="dropdown-item" data-set-theme="pink">
+                            <span class="theme-dot" style="background: #ec4899;"></span>
+                            Pink Rose Gold 🌸
+                        </button>
+                        <button class="dropdown-item" data-set-theme="emerald">
+                            <span class="theme-dot" style="background: #10b981;"></span>
+                            Emerald Forest 🌲
+                        </button>
+                        <button class="dropdown-item" data-set-theme="cyberpunk">
+                            <span class="theme-dot" style="background: #06b6d4;"></span>
+                            Cyberpunk Purple 💜
+                        </button>
+                        <button class="dropdown-item" data-set-theme="sunset">
+                            <span class="theme-dot" style="background: #f97316;"></span>
+                            Sunset Amber 🌅
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Login / User Button -->
+                <div id="logged-out-section">
+                    <button class="login-btn" id="open-signin-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                        Sign In
+                    </button>
+                </div>
+
+                <div id="logged-in-section" class="dropdown-wrapper" style="display: none;">
+                    <button class="user-profile-btn" id="user-menu-btn">
+                        <div class="user-avatar" id="user-avatar">Y</div>
+                        <span id="user-name-display">Yashi</span>
+                        <span style="font-size: 10px; opacity: 0.6;">▾</span>
+                    </button>
+                    <div class="dropdown-menu" id="user-dropdown">
+                        <button class="dropdown-item" id="logout-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                            Log Out
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3-Dot Menu Button -->
+                <div class="dropdown-wrapper">
+                    <button class="icon-btn" id="dots-menu-btn" title="More Options" aria-label="More Options">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+                    </button>
+                    <div class="dropdown-menu" id="dots-dropdown">
+                        <button class="dropdown-item" id="dot-option-history">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            History
+                        </button>
+                        <button class="dropdown-item" id="dot-option-compare">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                            Compare Rates
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" id="dot-option-more">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            More Info
+                        </button>
+                        <button class="dropdown-item" id="dot-option-faq">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            FAQ
+                        </button>
+                        <button class="dropdown-item" id="dot-option-about">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            About CurrenX
+                        </button>
+                        <button class="dropdown-item" id="dot-option-owner">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Owner Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrap">
+
+        <!-- VIEW 0: DEDICATED FIRST-TIME WELCOME LANDING PAGE -->
+        <div id="welcome-view" class="view-section active">
+            <div class="welcome-card">
+                <div class="welcome-brand-badge">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="17 1 21 5 17 9"></polyline>
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                        <polyline points="7 23 3 19 7 15"></polyline>
+                        <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                    </svg>
+                </div>
+                <h1 style="font-size: 36px; margin-bottom: 8px;">Welcome to Curren<span style="color: var(--brass);">X</span></h1>
+                <p class="sub" style="margin: 0 auto 28px; max-width: 36ch;">Your live exchange rate board, market analytics dashboard, and multi-currency calculator.</p>
+
+                <button class="btn-guest" id="welcome-guest-btn">Continue as Guest 🚀</button>
+                <button class="btn-submit" id="welcome-signin-btn" style="margin-top: 12px;">Sign In / Log In 🔑</button>
+            </div>
+        </div>
+
+        <!-- VIEW 1: CONVERTER (HOMEPAGE) -->
+        <div id="converter-view" class="view-section">
+            <header>
+                <div class="eyebrow">Live exchange board</div>
+                <h1>Currency Converter</h1>
+                <p class="sub">Enter an amount, pick two currencies, and watch the board flip to the current rate.</p>
+            </header>
+
+            <div class="board">
+                <div class="row">
+                    <div class="field">
+                        <label for="amount">Amount</label>
+                        <input id="amount" class="amount-input" type="text" inputmode="decimal" value="1" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label>From</label>
+                        <div class="cur" id="cur-from">
+                            <button class="cur-btn" type="button" aria-haspopup="listbox">
+                                <span class="flag" data-flag></span>
+                                <span data-code>USD</span>
+                                <span class="car">▾</span>
+                            </button>
+                            <div class="cur-panel">
+                                <div class="cur-search"><input type="text" placeholder="Search currency…"></div>
+                                <div class="cur-list" role="listbox"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="field"></div>
+
+                <div class="swap-row">
+                    <button class="swap-btn" id="swap" title="Swap currencies" aria-label="Swap currencies">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="17 1 21 5 17 9"></polyline>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                            <polyline points="7 23 3 19 7 15"></polyline>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="row" style="grid-template-columns:auto 1fr; margin-bottom:18px;">
+                    <div class="field">
+                        <label>To</label>
+                        <div class="cur" id="cur-to">
+                            <button class="cur-btn" type="button" aria-haspopup="listbox">
+                                <span class="flag" data-flag></span>
+                                <span data-code>INR</span>
+                                <span class="car">▾</span>
+                            </button>
+                            <div class="cur-panel">
+                                <div class="cur-search"><input type="text" placeholder="Search currency…"></div>
+                                <div class="cur-list" role="listbox"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field"></div>
+                </div>
+
+                <div class="result-block">
+                    <div class="result-label">Converted amount</div>
+                    <div class="flap-line" id="flap-result"></div>
+                </div>
+
+                <div class="meta">
+                    <span class="rate" id="rate-line">Loading rate…</span>
+                    <span class="status" id="status-line">fetching…</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: ENHANCED DASHBOARD -->
+        <div id="dashboard-view" class="view-section">
+            <header>
+                <div class="eyebrow">Analytics & Overview</div>
+                <h1>Currency Dashboard</h1>
+                <p class="sub">Track your recent conversions, quick access favorite pairs, and market summary.</p>
+            </header>
+
+            <div class="dash-grid">
+                <div class="stat-card">
+                    <div class="stat-title">Conversions</div>
+                    <div class="stat-val" id="stat-count">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Active Pair</div>
+                    <div class="stat-val" id="stat-active" style="font-size: 18px;">USD / INR</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Rates Provider</div>
+                    <div class="stat-val" style="font-size: 18px;">Live API</div>
+                </div>
             </div>
 
-            <div class="result-block">
-                <div class="result-label">Converted amount</div>
-                <div class="flap-line" id="flap-result"></div>
+            <!-- Currency Strength Heatmap Meter -->
+            <div class="dash-card">
+                <div class="dash-card-header">
+                    <h3 class="dash-card-title">📊 Currency Market Strength</h3>
+                    <span style="font-size: 11px; color: var(--brass); font-family: 'Space Mono', monospace;">LIVE INDEX</span>
+                </div>
+                <div class="meter-list">
+                    <div class="meter-item">
+                        <div class="meter-label-row">
+                            <span>🇺🇸 USD — US Dollar</span>
+                            <span style="color: var(--brass);">98% (Bullish)</span>
+                        </div>
+                        <div class="meter-bar-bg"><div class="meter-bar-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <div class="meter-item">
+                        <div class="meter-label-row">
+                            <span>🇬🇧 GBP — British Pound</span>
+                            <span style="color: var(--brass);">94% (Strong)</span>
+                        </div>
+                        <div class="meter-bar-bg"><div class="meter-bar-fill" style="width: 94%;"></div></div>
+                    </div>
+                    <div class="meter-item">
+                        <div class="meter-label-row">
+                            <span>🇪🇺 EUR — Euro</span>
+                            <span style="color: var(--brass);">91% (Steady)</span>
+                        </div>
+                        <div class="meter-bar-bg"><div class="meter-bar-fill" style="width: 91%;"></div></div>
+                    </div>
+                    <div class="meter-item">
+                        <div class="meter-label-row">
+                            <span>🇮🇳 INR — Indian Rupee</span>
+                            <span style="color: var(--brass);">88% (Stable)</span>
+                        </div>
+                        <div class="meter-bar-bg"><div class="meter-bar-fill" style="width: 88%;"></div></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="meta">
-                <span class="rate" id="rate-line">Loading rate…</span>
-                <span class="status" id="status-line">fetching…</span>
+            <!-- Quick Favorites -->
+            <div class="dash-card">
+                <div class="dash-card-header">
+                    <h3 class="dash-card-title">⚡ Quick Pairs</h3>
+                </div>
+                <div class="fav-pairs">
+                    <div class="fav-chip" data-from="USD" data-to="INR">
+                        <div class="fav-pair-code">USD ➔ INR</div>
+                        <div class="fav-pair-sub">US Dollar to Rupee</div>
+                    </div>
+                    <div class="fav-chip" data-from="EUR" data-to="USD">
+                        <div class="fav-pair-code">EUR ➔ USD</div>
+                        <div class="fav-pair-sub">Euro to US Dollar</div>
+                    </div>
+                    <div class="fav-chip" data-from="GBP" data-to="USD">
+                        <div class="fav-pair-code">GBP ➔ USD</div>
+                        <div class="fav-pair-sub">Pound to US Dollar</div>
+                    </div>
+                    <div class="fav-chip" data-from="USD" data-to="JPY">
+                        <div class="fav-pair-code">USD ➔ JPY</div>
+                        <div class="fav-pair-sub">Dollar to Yen</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversion History -->
+            <div class="dash-card" id="history-section">
+                <div class="dash-card-header">
+                    <h3 class="dash-card-title">🕒 Recent Conversions</h3>
+                    <button class="clear-btn" id="clear-history-btn">Clear History</button>
+                </div>
+                <div class="history-list" id="history-container">
+                    <div class="empty-history">No recent conversions logged yet.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: COMPARE MATRIX -->
+        <div id="compare-view" class="view-section">
+            <a class="back-link" id="compare-back-btn">← Back to Converter</a>
+            <header>
+                <div class="eyebrow">Multi-Currency Matrix</div>
+                <h1>Compare Exchange Rates</h1>
+                <p class="sub">Compare your base currency against major global currencies simultaneously.</p>
+            </header>
+
+            <div class="board" style="padding: 20px; margin-bottom: 20px;">
+                <div class="row">
+                    <div class="field">
+                        <label for="compare-amount">Base Amount</label>
+                        <input id="compare-amount" class="amount-input" type="text" inputmode="decimal" value="100" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label>Base Currency</label>
+                        <div class="cur" id="compare-cur">
+                            <button class="cur-btn" type="button" aria-haspopup="listbox">
+                                <span class="flag" data-flag>🇺🇸</span>
+                                <span data-code>USD</span>
+                                <span class="car">▾</span>
+                            </button>
+                            <div class="cur-panel">
+                                <div class="cur-search"><input type="text" placeholder="Search currency…"></div>
+                                <div class="cur-list" role="listbox"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compare-matrix" id="compare-matrix-container">
+                <!-- Dynamically populated compare cards -->
+            </div>
+        </div>
+
+        <!-- VIEW 4: DEDICATED SIGN IN PAGE -->
+        <div id="signin-view" class="view-section">
+            <a class="back-link" id="signin-back-btn">← Back to Converter</a>
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Sign In to CurrenX</h2>
+                    <p>Enter your credentials to access your saved pairs & profile</p>
+                </div>
+
+                <form id="signin-form">
+                    <div class="form-group">
+                        <label for="signin-email">Email Address</label>
+                        <input type="email" id="signin-email" class="form-control" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-pass">Password</label>
+                        <input type="password" id="signin-pass" class="form-control" placeholder="••••••••" required>
+                        <div>
+                            <a class="forgot-link" id="forgot-pass-link">Forgot password?</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Sign In</button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>Or</span>
+                </div>
+
+                <button class="btn-google" id="google-signin-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    Continue with Google
+                </button>
+
+                <div class="auth-footer">
+                    Don't have an account? <a id="goto-signup-btn">Sign Up</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 5: DEDICATED SIGN UP PAGE -->
+        <div id="signup-view" class="view-section">
+            <a class="back-link" id="signup-back-btn">← Back to Converter</a>
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Create Account</h2>
+                    <p>Join CurrenX for personalized rates & historical insights</p>
+                </div>
+
+                <form id="signup-form">
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="signup-fname">First Name</label>
+                            <input type="text" id="signup-fname" class="form-control" placeholder="Yashi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-lname">Last Name</label>
+                            <input type="text" id="signup-lname" class="form-control" placeholder="Aadarsh" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" class="form-control" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-pass">Password</label>
+                        <input type="password" id="signup-pass" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-cpass">Confirm Password</label>
+                        <input type="password" id="signup-cpass" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Create Account</button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>Or</span>
+                </div>
+
+                <button class="btn-google" id="google-signup-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    Continue with Google
+                </button>
+
+                <div class="auth-footer">
+                    Already have an account? <a id="goto-signin-btn">Sign In</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 5B: GOOGLE EMAIL ENTRY VIEW -->
+        <div id="google-email-view" class="view-section">
+            <a class="back-link" id="google-email-back-btn">← Back to Sign In</a>
+            <div class="auth-card">
+                <div class="auth-header">
+                    <svg width="32" height="32" viewBox="0 0 24 24" style="margin-bottom: 8px;"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    <h2>Google Sign In</h2>
+                    <p>Enter your Google Email Address to receive OTP</p>
+                </div>
+                <form id="google-email-form">
+                    <div class="form-group">
+                        <label for="g-email">Google Email Address</label>
+                        <input type="email" id="g-email" class="form-control" placeholder="yashi.google@gmail.com" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Next →</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- VIEW 5C: GOOGLE OTP VERIFICATION VIEW -->
+        <div id="google-otp-view" class="view-section">
+            <a class="back-link" id="google-otp-back-btn">← Back to Email Entry</a>
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Enter OTP Code</h2>
+                    <p>We sent a 4-digit code to <strong id="display-g-email" style="color: var(--brass);">user@gmail.com</strong></p>
+                </div>
+                <form id="google-otp-form">
+                    <div class="otp-container" style="display: flex; gap: 12px; justify-content: center; margin: 20px 0 24px 0;">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required autocomplete="off">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required autocomplete="off">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required autocomplete="off">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-submit">Verify & Complete Sign In</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- VIEW 6: DEDICATED MORE INFO PAGE -->
+        <div id="more-view" class="view-section">
+            <a class="back-link" id="more-back-btn">← Back to Converter</a>
+            <header>
+                <div class="eyebrow">Platform Specifications</div>
+                <h1>More Information</h1>
+                <p class="sub">Comprehensive breakdown of features, live data feeds, and calculation output specs.</p>
+            </header>
+
+            <div class="about-section">
+                <h3 style="margin-top: 0; font-size: 18px; color: var(--brass);">🌐 Real-Time Data Engine</h3>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">
+                    CurrenX connects to institutional-grade forex rate APIs, providing synchronized rates for over 43 global fiat currencies. Rates are continuously synced in the background every 30 minutes.
+                </p>
+
+                <h3 style="margin-top: 24px; font-size: 18px; color: var(--brass);">⚡ Output & Features Summary</h3>
+                <ul style="color: var(--text); font-size: 14px; line-height: 1.8; padding-left: 20px; margin: 0;">
+                    <li><strong>Interactive Split-Flap Display:</strong> Dynamic character animation rendering exact conversion results.</li>
+                    <li><strong>Multi-Currency Rate Matrix:</strong> Compare 1 base currency against USD, EUR, GBP, INR, JPY, AUD, CAD, and CHF simultaneously.</li>
+                    <li><strong>Offline History Caching:</strong> Save and manage your recent conversion logs in browser local storage.</li>
+                    <li><strong>6 Custom Color Themes:</strong> Switch between Dark 🌙, Light ☀️, Pink 🌸, Emerald 🌲, Cyberpunk 💜, and Sunset 🌅 modes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- VIEW 7: DEDICATED FAQ PAGE -->
+        <div id="faq-view" class="view-section">
+            <a class="back-link" id="faq-back-btn">← Back to Converter</a>
+            <header>
+                <div class="eyebrow">Help & Support</div>
+                <h1>Frequently Asked Questions</h1>
+                <p class="sub">Find quick answers to common questions about exchange rates, updates, and usage.</p>
+            </header>
+
+            <div class="faq-accordion">
+                <div class="faq-card">
+                    <div class="faq-question">
+                        <span>How often are currency exchange rates updated?</span>
+                        <span class="faq-icon">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        Exchange rates are fetched live from open.er-api.com and automatically refreshed in the background every 30 minutes to ensure high accuracy.
+                    </div>
+                </div>
+
+                <div class="faq-card">
+                    <div class="faq-question">
+                        <span>Is CurrenX free to use?</span>
+                        <span class="faq-icon">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! CurrenX is 100% free with no registration required for basic conversions, though signing in unlocks saved preferences and history persistence across devices.
+                    </div>
+                </div>
+
+                <div class="faq-card">
+                    <div class="faq-question">
+                        <span>How does the Multi-Currency Compare feature work?</span>
+                        <span class="faq-icon">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        The Compare matrix allows you to select a base currency and amount, instantly calculating the converted values for 8 major world currencies simultaneously.
+                    </div>
+                </div>
+
+                <div class="faq-card">
+                    <div class="faq-question">
+                        <span>Are my conversion history logs secure?</span>
+                        <span class="faq-icon">▾</span>
+                    </div>
+                    <div class="faq-answer">
+                        All conversion logs and theme settings are stored locally in your web browser's localStorage, keeping your information private and secure.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 8: DEDICATED ABOUT CURRENX PAGE -->
+        <div id="about-view" class="view-section">
+            <a class="back-link" id="about-back-btn">← Back to Converter</a>
+            <header>
+                <div class="eyebrow">Platform Overview</div>
+                <h1>About CurrenX</h1>
+                <p class="sub">Learn about the platform mission, data engine, and visual exchange technology.</p>
+            </header>
+
+            <div class="about-section">
+                <h3 style="margin-top: 0; font-size: 18px; color: var(--brass);">🚀 Mission & Vision</h3>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">
+                    CurrenX was built to deliver a modern, visually captivating, and ultra-responsive currency conversion experience. By combining live institutional data feeds with split-flap board mechanics, multi-currency matrix comparison, and custom theme engine, CurrenX sets a new standard in web financial tools.
+                </p>
+
+                <h3 style="margin-top: 24px; font-size: 18px; color: var(--brass);">🛠 Technology Stack</h3>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">
+                    Constructed with zero heavy external framework dependencies using HTML5, Vanilla CSS3 Custom Properties, JavaScript ES6+, Open Exchange Rates API, and LocalStorage caching.
+                </p>
+            </div>
+        </div>
+
+        <!-- VIEW 9: DEDICATED OWNER PROFILE PAGE -->
+        <div id="owner-view" class="view-section">
+            <a class="back-link" id="owner-back-btn">← Back to Converter</a>
+            <header>
+                <div class="eyebrow">Creator Profile</div>
+                <h1>About the Owner</h1>
+                <p class="sub">Meet the architect behind CurrenX Exchange Board & Financial Tools.</p>
+            </header>
+
+            <div class="about-section">
+                <div class="owner-card">
+                    <div class="owner-avatar-lg">YA</div>
+                    <div class="owner-details">
+                        <h3>Yashi Aadarsh</h3>
+                        <div class="owner-title">Product Architect & Lead Engineer</div>
+                        <p>Creator and lead engineer of CurrenX. Specializing in high-performance web applications, financial software interfaces, responsive UX design, and custom theme systems.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -535,6 +2074,24 @@
             Rates from <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">open.er-api.com</a>,
             refreshed roughly once every 24 hours by the provider. For guidance only — not for trading decisions.
         </footer>
+    </div>
+
+    <!-- LOGOUT CONFIRMATION MODAL OVERLAY -->
+    <div class="modal-overlay" id="logout-modal">
+        <div class="modal-box">
+            <div class="welcome-brand-badge" style="background: linear-gradient(135deg, var(--down), #b91c1c); width: 60px; height: 60px; border-radius: 16px; margin: 0 auto 16px;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </div>
+            <h2 class="modal-title" style="margin-bottom: 8px;">Log Out Confirmation</h2>
+            <p class="sub" style="margin: 0 auto 24px; max-width: 32ch;">Are you sure you want to log out of your CurrenX session?</p>
+
+            <button class="btn-submit" id="confirm-logout-btn" style="background: var(--down); color: #fff;">Yes, Log Out</button>
+            <button class="btn-guest" id="cancel-logout-btn" style="margin-top: 10px;">Cancel</button>
+        </div>
     </div>
 
     <script>
@@ -559,7 +2116,21 @@
             const ZERO_DECIMAL = new Set(["JPY", "KRW", "VND", "IDR", "HUF", "CLP"]);
             const byCode = Object.fromEntries(CURRENCIES.map(c => [c[0], c]));
 
-            const state = { from: "USD", to: "INR", amount: 1, rates: null, base: null, updated: null };
+            const state = { 
+                from: "USD", 
+                to: "INR", 
+                amount: 1, 
+                compareBase: "USD",
+                compareAmount: 100,
+                rates: null, 
+                base: null, 
+                updated: null,
+                history: JSON.parse(localStorage.getItem('currenx_history') || '[]'),
+                user: JSON.parse(localStorage.getItem('currenx_user') || 'null'),
+                theme: localStorage.getItem('currenx_theme') || 'dark',
+                welcomeDone: localStorage.getItem('currenx_welcome_done') === 'true',
+                googleEmail: ''
+            };
 
             const els = {
                 amount: document.getElementById('amount'),
@@ -567,8 +2138,364 @@
                 flapResult: document.getElementById('flap-result'),
                 rateLine: document.getElementById('rate-line'),
                 statusLine: document.getElementById('status-line'),
+                themeMenuBtn: document.getElementById('theme-menu-btn'),
+                themeDropdown: document.getElementById('theme-dropdown'),
+                mainNavbar: document.getElementById('main-navbar'),
+                tabConverter: document.getElementById('tab-converter'),
+                tabDashboard: document.getElementById('tab-dashboard'),
+                welcomeView: document.getElementById('welcome-view'),
+                converterView: document.getElementById('converter-view'),
+                dashboardView: document.getElementById('dashboard-view'),
+                compareView: document.getElementById('compare-view'),
+                signinView: document.getElementById('signin-view'),
+                signupView: document.getElementById('signup-view'),
+                googleEmailView: document.getElementById('google-email-view'),
+                googleOtpView: document.getElementById('google-otp-view'),
+                moreView: document.getElementById('more-view'),
+                faqView: document.getElementById('faq-view'),
+                aboutView: document.getElementById('about-view'),
+                ownerView: document.getElementById('owner-view'),
+                openSigninBtn: document.getElementById('open-signin-btn'),
+                signinBackBtn: document.getElementById('signin-back-btn'),
+                signupBackBtn: document.getElementById('signup-back-btn'),
+                googleEmailBackBtn: document.getElementById('google-email-back-btn'),
+                googleOtpBackBtn: document.getElementById('google-otp-back-btn'),
+                compareBackBtn: document.getElementById('compare-back-btn'),
+                moreBackBtn: document.getElementById('more-back-btn'),
+                faqBackBtn: document.getElementById('faq-back-btn'),
+                aboutBackBtn: document.getElementById('about-back-btn'),
+                ownerBackBtn: document.getElementById('owner-back-btn'),
+                gotoSignupBtn: document.getElementById('goto-signup-btn'),
+                gotoSigninBtn: document.getElementById('goto-signin-btn'),
+                signinForm: document.getElementById('signin-form'),
+                signupForm: document.getElementById('signup-form'),
+                googleEmailForm: document.getElementById('google-email-form'),
+                googleOtpForm: document.getElementById('google-otp-form'),
+                gEmailInput: document.getElementById('g-email'),
+                displayGEmail: document.getElementById('display-g-email'),
+                googleSigninBtn: document.getElementById('google-signin-btn'),
+                googleSignupBtn: document.getElementById('google-signup-btn'),
+                forgotPassLink: document.getElementById('forgot-pass-link'),
+                loggedOutSec: document.getElementById('logged-out-section'),
+                loggedInSec: document.getElementById('logged-in-section'),
+                userMenuBtn: document.getElementById('user-menu-btn'),
+                userDropdown: document.getElementById('user-dropdown'),
+                userNameDisplay: document.getElementById('user-name-display'),
+                userAvatar: document.getElementById('user-avatar'),
+                logoutBtn: document.getElementById('logout-btn'),
+                logoutModal: document.getElementById('logout-modal'),
+                confirmLogoutBtn: document.getElementById('confirm-logout-btn'),
+                cancelLogoutBtn: document.getElementById('cancel-logout-btn'),
+                dotsMenuBtn: document.getElementById('dots-menu-btn'),
+                dotsDropdown: document.getElementById('dots-dropdown'),
+                dotOptionHistory: document.getElementById('dot-option-history'),
+                dotOptionCompare: document.getElementById('dot-option-compare'),
+                dotOptionMore: document.getElementById('dot-option-more'),
+                dotOptionFaq: document.getElementById('dot-option-faq'),
+                dotOptionAbout: document.getElementById('dot-option-about'),
+                dotOptionOwner: document.getElementById('dot-option-owner'),
+                historyContainer: document.getElementById('history-container'),
+                clearHistoryBtn: document.getElementById('clear-history-btn'),
+                statCount: document.getElementById('stat-count'),
+                statActive: document.getElementById('stat-active'),
+                navBrand: document.getElementById('nav-brand'),
+                compareAmount: document.getElementById('compare-amount'),
+                compareMatrixContainer: document.getElementById('compare-matrix-container'),
+                welcomeSigninBtn: document.getElementById('welcome-signin-btn'),
+                welcomeGuestBtn: document.getElementById('welcome-guest-btn')
             };
 
+            /* ---- 6-Theme Palette Management ---- */
+            function applyTheme(theme) {
+                state.theme = theme;
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('currenx_theme', theme);
+
+                document.querySelectorAll('[data-set-theme]').forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-set-theme') === theme);
+                });
+            }
+
+            els.themeMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                els.dotsDropdown.classList.remove('open');
+                els.userDropdown.classList.remove('open');
+                els.themeDropdown.classList.toggle('open');
+            });
+
+            document.querySelectorAll('[data-set-theme]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const selectedTheme = btn.getAttribute('data-set-theme');
+                    applyTheme(selectedTheme);
+                    els.themeDropdown.classList.remove('open');
+                });
+            });
+
+            applyTheme(state.theme);
+
+            /* ---- View Router ---- */
+            function switchView(viewName) {
+                const views = {
+                    'welcome': els.welcomeView,
+                    'converter': els.converterView,
+                    'dashboard': els.dashboardView,
+                    'compare': els.compareView,
+                    'signin': els.signinView,
+                    'signup': els.signupView,
+                    'g-email': els.googleEmailView,
+                    'g-otp': els.googleOtpView,
+                    'more': els.moreView,
+                    'faq': els.faqView,
+                    'about': els.aboutView,
+                    'owner': els.ownerView
+                };
+
+                Object.keys(views).forEach(v => {
+                    if (v === viewName) {
+                        views[v].classList.add('active');
+                    } else {
+                        views[v].classList.remove('active');
+                    }
+                });
+
+                if (viewName === 'welcome') {
+                    els.mainNavbar.classList.add('hidden');
+                } else {
+                    els.mainNavbar.classList.remove('hidden');
+                }
+
+                els.tabConverter.classList.toggle('active', viewName === 'converter');
+                els.tabDashboard.classList.toggle('active', viewName === 'dashboard');
+
+                if (viewName === 'dashboard') renderDashboard();
+                if (viewName === 'compare') renderCompareMatrix();
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            /* ---- Initial Entry Routing ---- */
+            if (!state.welcomeDone && !state.user) {
+                switchView('welcome');
+            } else {
+                switchView('converter');
+            }
+
+            els.welcomeGuestBtn.addEventListener('click', () => {
+                state.welcomeDone = true;
+                localStorage.setItem('currenx_welcome_done', 'true');
+                switchView('dashboard');
+            });
+
+            els.welcomeSigninBtn.addEventListener('click', () => {
+                state.welcomeDone = true;
+                localStorage.setItem('currenx_welcome_done', 'true');
+                switchView('signin');
+            });
+
+            els.tabConverter.addEventListener('click', () => switchView('converter'));
+            els.tabDashboard.addEventListener('click', () => switchView('dashboard'));
+            els.navBrand.addEventListener('click', () => switchView('converter'));
+            els.openSigninBtn.addEventListener('click', () => switchView('signin'));
+            els.signinBackBtn.addEventListener('click', () => switchView('converter'));
+            els.signupBackBtn.addEventListener('click', () => switchView('converter'));
+            els.googleEmailBackBtn.addEventListener('click', () => switchView('signin'));
+            els.googleOtpBackBtn.addEventListener('click', () => switchView('g-email'));
+            els.compareBackBtn.addEventListener('click', () => switchView('converter'));
+            els.moreBackBtn.addEventListener('click', () => switchView('converter'));
+            els.faqBackBtn.addEventListener('click', () => switchView('converter'));
+            els.aboutBackBtn.addEventListener('click', () => switchView('converter'));
+            els.ownerBackBtn.addEventListener('click', () => switchView('converter'));
+            els.gotoSignupBtn.addEventListener('click', () => switchView('signup'));
+            els.gotoSigninBtn.addEventListener('click', () => switchView('signin'));
+
+            /* ---- FAQ Accordion ---- */
+            document.querySelectorAll('.faq-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('open');
+                });
+            });
+
+            /* ---- 3-Dot Options Menu ---- */
+            els.dotsMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                els.themeDropdown.classList.remove('open');
+                els.userDropdown.classList.remove('open');
+                els.dotsDropdown.classList.toggle('open');
+            });
+
+            els.dotOptionHistory.addEventListener('click', () => {
+                els.dotsDropdown.classList.remove('open');
+                switchView('dashboard');
+                document.getElementById('history-section').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            els.dotOptionCompare.addEventListener('click', () => {
+                els.dotsDropdown.classList.remove('open');
+                switchView('compare');
+            });
+
+            els.dotOptionMore.addEventListener('click', () => {
+                els.dotsDropdown.classList.remove('open');
+                switchView('more');
+            });
+
+            els.dotOptionFaq.addEventListener('click', () => {
+                els.dotsDropdown.classList.remove('open');
+                switchView('faq');
+            });
+
+            els.dotOptionAbout.addEventListener('click', () => {
+                els.dotsDropdown.classList.remove('open');
+                switchView('about');
+            });
+
+            els.dotOptionOwner.addEventListener('click', () => {
+                els.dotsDropdown.classList.remove('open');
+                switchView('owner');
+            });
+
+            /* ---- Multi-Step Google Auth Flow ---- */
+            function startGoogleFlow() {
+                switchView('g-email');
+            }
+
+            els.googleSigninBtn.addEventListener('click', startGoogleFlow);
+            els.googleSignupBtn.addEventListener('click', startGoogleFlow);
+
+            els.googleEmailForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailVal = els.gEmailInput.value.trim();
+                if (emailVal) {
+                    state.googleEmail = emailVal;
+                    els.displayGEmail.textContent = emailVal;
+                    switchView('g-otp');
+                    // Focus first OTP box
+                    const firstOtp = document.querySelectorAll('.otp-input')[0];
+                    if (firstOtp) firstOtp.focus();
+                }
+            });
+
+            /* OTP Auto-advance Focus Logic */
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', () => {
+                    if (input.value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !input.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
+
+            els.googleOtpForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let otpCode = '';
+                otpInputs.forEach(inp => otpCode += inp.value);
+                if (otpCode.length === 4) {
+                    handleLoginSuccess({ 
+                        email: state.googleEmail, 
+                        name: state.googleEmail.split('@')[0] + ' (Google)' 
+                    });
+                    // Clear OTP inputs
+                    otpInputs.forEach(inp => inp.value = '');
+                } else {
+                    alert('Please enter all 4 digits of the OTP code.');
+                }
+            });
+
+            /* ---- Standard Authentication & Logout Logic ---- */
+            function updateAuthUI() {
+                if (state.user) {
+                    els.loggedOutSec.style.display = 'none';
+                    els.loggedInSec.style.display = 'block';
+                    const name = state.user.name || state.user.email.split('@')[0];
+                    els.userNameDisplay.textContent = name;
+                    els.userAvatar.textContent = name.charAt(0).toUpperCase();
+                } else {
+                    els.loggedOutSec.style.display = 'block';
+                    els.loggedInSec.style.display = 'none';
+                }
+            }
+
+            function handleLoginSuccess(userObj) {
+                state.user = userObj;
+                localStorage.setItem('currenx_user', JSON.stringify(state.user));
+                updateAuthUI();
+                switchView('converter');
+            }
+
+            els.signinForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('signin-email').value;
+                handleLoginSuccess({ email, name: email.split('@')[0] });
+            });
+
+            els.signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const fname = document.getElementById('signup-fname').value.trim();
+                const lname = document.getElementById('signup-lname').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const pass = document.getElementById('signup-pass').value;
+                const cpass = document.getElementById('signup-cpass').value;
+
+                if (pass !== cpass) {
+                    alert('Passwords do not match. Please re-enter passwords.');
+                    return;
+                }
+
+                handleLoginSuccess({ email, name: `${fname} ${lname}`.trim() });
+            });
+
+            els.forgotPassLink.addEventListener('click', () => {
+                const email = prompt('Enter your registered email address to receive password reset instructions:');
+                if (email) {
+                    alert(`Password reset link sent to ${email}`);
+                }
+            });
+
+            els.userMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                els.themeDropdown.classList.remove('open');
+                els.dotsDropdown.classList.remove('open');
+                els.userDropdown.classList.toggle('open');
+            });
+
+            document.addEventListener('click', () => {
+                els.userDropdown.classList.remove('open');
+                els.dotsDropdown.classList.remove('open');
+                els.themeDropdown.classList.remove('open');
+            });
+
+            /* Logout Confirmation Prompt */
+            els.logoutBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                els.userDropdown.classList.remove('open');
+                els.logoutModal.classList.add('open');
+            });
+
+            els.cancelLogoutBtn.addEventListener('click', () => {
+                els.logoutModal.classList.remove('open');
+            });
+
+            els.logoutModal.addEventListener('click', (e) => {
+                if (e.target === els.logoutModal) els.logoutModal.classList.remove('open');
+            });
+
+            els.confirmLogoutBtn.addEventListener('click', () => {
+                els.logoutModal.classList.remove('open');
+                state.user = null;
+                localStorage.removeItem('currenx_user');
+                updateAuthUI();
+                switchView('converter');
+                alert('You have successfully logged out of CurrenX.');
+            });
+
+            updateAuthUI();
+
+            /* ---- Dropdown Builder ---- */
             function buildDropdown(containerId, onPick) {
                 const root = document.getElementById(containerId);
                 const btn = root.querySelector('.cur-btn');
@@ -608,8 +2535,10 @@
                 return {
                     setDisplay(code) {
                         const c = byCode[code];
-                        root.querySelector('[data-flag]').textContent = c[2];
-                        root.querySelector('[data-code]').textContent = c[0];
+                        if (c) {
+                            root.querySelector('[data-flag]').textContent = c[2];
+                            root.querySelector('[data-code]').textContent = c[0];
+                        }
                     }
                 };
             }
@@ -618,6 +2547,13 @@
             const toDd = buildDropdown('cur-to', (code) => { state.to = code; toDd.setDisplay(code); recompute(true); });
             fromDd.setDisplay(state.from);
             toDd.setDisplay(state.to);
+
+            const compareDd = buildDropdown('compare-cur', (code) => { 
+                state.compareBase = code; 
+                compareDd.setDisplay(code); 
+                renderCompareMatrix(); 
+            });
+            compareDd.setDisplay(state.compareBase);
 
             els.swap.addEventListener('click', () => {
                 els.swap.classList.add('spin');
@@ -635,6 +2571,16 @@
                     const v = parseFloat(els.amount.value.replace(/,/g, ''));
                     state.amount = isNaN(v) ? 0 : v;
                     recompute(true);
+                }, 250);
+            });
+
+            let compareDebounceTimer;
+            els.compareAmount.addEventListener('input', () => {
+                clearTimeout(compareDebounceTimer);
+                compareDebounceTimer = setTimeout(() => {
+                    const v = parseFloat(els.compareAmount.value.replace(/,/g, ''));
+                    state.compareAmount = isNaN(v) ? 0 : v;
+                    renderCompareMatrix();
                 }, 250);
             });
 
@@ -656,6 +2602,20 @@
                 });
             }
 
+            function logHistoryItem(fromCode, toCode, amt, resultStr) {
+                const item = {
+                    id: Date.now(),
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    from: fromCode,
+                    to: toCode,
+                    amount: amt,
+                    result: resultStr
+                };
+                state.history.unshift(item);
+                if (state.history.length > 20) state.history.pop();
+                localStorage.setItem('currenx_history', JSON.stringify(state.history));
+            }
+
             function recompute(animate) {
                 if (!state.rates) { return; }
                 const fromRate = state.rates[state.from];
@@ -667,8 +2627,9 @@
                 }
                 const amountInBase = state.amount / fromRate;
                 const converted = amountInBase * toRate;
-                const symbol = byCode[state.to][0];
-                renderFlap(symbol + ' ' + formatNumber(converted, state.to));
+                const symbol = byCode[state.to] ? byCode[state.to][0] : state.to;
+                const formattedVal = formatNumber(converted, state.to);
+                renderFlap(symbol + ' ' + formattedVal);
 
                 const unitRate = toRate / fromRate;
                 els.rateLine.textContent = `1 ${state.from} = ${formatNumber(unitRate, state.to)} ${state.to}`;
@@ -676,7 +2637,75 @@
                     els.statusLine.textContent = 'updated ' + state.updated;
                     els.statusLine.className = 'status ok';
                 }
+
+                els.statActive.textContent = `${state.from} / ${state.to}`;
+                logHistoryItem(state.from, state.to, state.amount, `${symbol} ${formattedVal}`);
             }
+
+            function renderDashboard() {
+                els.statCount.textContent = state.history.length;
+                els.statActive.textContent = `${state.from} / ${state.to}`;
+
+                if (state.history.length === 0) {
+                    els.historyContainer.innerHTML = '<div class="empty-history">No recent conversions logged yet.</div>';
+                    return;
+                }
+
+                els.historyContainer.innerHTML = state.history.slice(0, 10).map(item => `
+                    <div class="history-item">
+                        <div>
+                            <span class="hist-pair">${item.amount} ${item.from} ➔ ${item.to}</span>
+                            <span class="hist-time"> at ${item.time}</span>
+                        </div>
+                        <div class="hist-val">${item.result}</div>
+                    </div>
+                `).join('');
+            }
+
+            function renderCompareMatrix() {
+                if (!state.rates) return;
+                const targets = ["USD", "EUR", "GBP", "INR", "JPY", "AUD", "CAD", "CHF"].filter(c => c !== state.compareBase);
+                const baseRate = state.rates[state.compareBase];
+                if (!baseRate) return;
+
+                els.compareMatrixContainer.innerHTML = targets.map(code => {
+                    const cInfo = byCode[code];
+                    const targetRate = state.rates[code];
+                    if (!targetRate) return '';
+                    const converted = (state.compareAmount / baseRate) * targetRate;
+                    return `
+                        <div class="compare-card">
+                            <div class="compare-card-left">
+                                <span class="compare-card-flag">${cInfo[2]}</span>
+                                <div>
+                                    <div class="compare-card-code">${cInfo[0]}</div>
+                                    <div class="compare-card-name">${cInfo[1]}</div>
+                                </div>
+                            </div>
+                            <div class="compare-card-val">${cInfo[0]} ${formatNumber(converted, code)}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            els.clearHistoryBtn.addEventListener('click', () => {
+                state.history = [];
+                localStorage.removeItem('currenx_history');
+                renderDashboard();
+            });
+
+            document.querySelectorAll('.fav-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const from = chip.getAttribute('data-from');
+                    const to = chip.getAttribute('data-to');
+                    state.from = from;
+                    state.to = to;
+                    fromDd.setDisplay(from);
+                    toDd.setDisplay(to);
+                    switchView('converter');
+                    recompute(true);
+                });
+            });
 
             async function fetchRates() {
                 els.statusLine.textContent = 'fetching…';
@@ -699,7 +2728,7 @@
             }
 
             fetchRates();
-            setInterval(fetchRates, 30 * 60 * 1000); // refresh every 30 min
+            setInterval(fetchRates, 30 * 60 * 1000);
         })();
     </script>
 
